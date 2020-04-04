@@ -12,7 +12,11 @@ const VideoListCard = styled("div", () => ({
     "rgba(1, 1, 1, 0.05) 0px 0px 1px, rgba(1, 1, 1, 0.06) 0px 0px 10px",
   backgroundColor: "#ffffff",
   borderRadius: "4px",
-  fontSize: "1.6rem"
+  fontSize: "1.6rem",
+  cursor: "pointer",
+  ":hover": {
+    background: "#eee"
+  }
 }));
 
 const ImageContainer = styled("div", () => ({
@@ -25,7 +29,7 @@ const VideoItemList = ({ video, onVideoClick }) => {
     <VideoListCard onClick={() => onVideoClick(video)}>
       <Flex>
         <ImageContainer>
-          <img src={imageUrl} alt={"image"} />
+          <img src={imageUrl} alt="video-thumbnail" />
         </ImageContainer>
         <span>{video.snippet.title}</span>
       </Flex>

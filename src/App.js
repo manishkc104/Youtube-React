@@ -13,32 +13,36 @@ const App = () => {
   };
 
   React.useEffect(() => {
-    videoSearch("surfboards");
+    videoSearch("asim").then(data => {
+      const { items: videos } = data.data;
+      setVideos(video => ({
+        ...video,
+        videos: videos,
+        selectedVideo: videos[0]
+      }));
+    });
   }, []);
 
-  const API_KEY = "Your Api goes here";
+  const API_KEY = "AIzaSyBUIJHg3bUCNPgubg69g_IHqLzQ_37LfRk";
 
   const [video, setVideos] = React.useState(INITIAL_DATA);
 
-  const videoSearch = term => {
-    youtubeApi
-      .get("search", {
-        params: {
-          part: "snippet",
-          maxResults: 10,
-          key: API_KEY,
-          q: term
-        }
-      })
-      .then(data => {
-        const { items: videos } = data.data;
-        setVideos({ ...video, videos: videos, selectedVideo: videos[0] });
-      });
-  };
+  const videoSearch = term =>
+    youtubeApi.get("search", {
+      params: {
+        part: "snippet",
+        maxResults: 10,
+        key: API_KEY,
+        q: term
+      }
+    });
 
   const videoDebounceSearch = debounce(term => {
-    videoSearch(term);
-  }, 300);
+    videoSearch(term).then(data => {
+      const { items: videos } = data.data;
+      setVideos({ ...video, videos: videos, selectedVideo: videos[0] });
+    });
+  }, 500);
 
   return (
     <React.Fragment>
