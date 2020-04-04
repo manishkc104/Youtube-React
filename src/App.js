@@ -13,7 +13,7 @@ const App = () => {
   };
 
   React.useEffect(() => {
-    videoSearch("asim").then(data => {
+    videoSearch("Youtube").then(data => {
       const { items: videos } = data.data;
       setVideos(video => ({
         ...video,
@@ -23,7 +23,7 @@ const App = () => {
     });
   }, []);
 
-  const API_KEY = "AIzaSyBUIJHg3bUCNPgubg69g_IHqLzQ_37LfRk";
+  const API_KEY = "your api key";
 
   const [video, setVideos] = React.useState(INITIAL_DATA);
 
